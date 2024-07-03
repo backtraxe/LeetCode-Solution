@@ -78,22 +78,32 @@ class Solution {
 public:
     ListNode* reverseKGroup(ListNode* head, int k) {
         ListNode dummy{0, head};
-        // 记录上一个组的尾部
+        // 记录上一个组的尾节点
         ListNode* preTail = &dummy;
-        while (true) {
-            // 查找第 k-1 个节点
+        while (preTail->next) {
             int n = k;
+            // 当前组头节点
             ListNode* curHead = preTail->next;
+            // 当前组尾节点
             ListNode* curTail = curHead;
-            while (curTail && n--) {
-                curTail = curTail->next;
-            }
+            while (curTail && --n) { curTail = curTail->next; }
+
+            // 节点数量不够一组，不翻转
             if (!curTail) break;
+
             ListNode* nxtHead = curTail->next;
+
+            // 断开当前组
             curTail->next = nullptr;
+
+            // 翻转后，curTail 是头，curHead 是尾
             ListNode* curNewHead = reverseList(curHead);
+
+            // 重新连接
             preTail->next = curNewHead;
             curHead->next = nxtHead;
+
+            // 下一组
             preTail = curHead;
         }
         return dummy.next;
