@@ -73,6 +73,7 @@
 // @lc code=start
 #include <unordered_map>
 using namespace std;
+
 class LRUCache {
 public:
     LRUCache(int capacity) : m_dummy(new Node(0, 0)), m_capacity(capacity) {
@@ -80,7 +81,6 @@ public:
     }
 
     int get(int key) {
-        cout << "get" << endl;
         auto it = m_data.find(key);
         if (it == m_data.end()) return -1;
         auto node = it->second;
@@ -90,7 +90,6 @@ public:
     }
 
     void put(int key, int value) {
-        cout << "put" << endl;
         auto it = m_data.find(key);
         if (it != m_data.end()) {
             auto node = it->second;
