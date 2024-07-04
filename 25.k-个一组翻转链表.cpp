@@ -68,11 +68,13 @@
  * };
  */
 
-// struct ListNode {
-//     int val;
-//     ListNode* next;
-//     ListNode(int x = 0, ListNode* next = nullptr) : val(x), next(next) {}
-// };
+#ifndef __linux__
+struct ListNode {
+    int val;
+    ListNode* next;
+    ListNode(int x = 0, ListNode* next = nullptr) : val(x), next(next) {}
+};
+#endif
 
 class Solution {
 public:
